@@ -1,0 +1,59 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+
+    <mat-toolbar>
+      <img src="assets/bitzua.png" width="100%" alt="">
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <mat-divider></mat-divider>
+      <a mat-list-item (click)="drawer.toggle()" routerLink="/user" style="cursor:pointer">
+        <mat-icon>accessibility</mat-icon>
+        <span>Usuarios</span>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item href="#">Link 2</a>
+      <mat-divider></mat-divider>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
+        <mat-icon *ngIf="drawer.opened">close</mat-icon>
+      </button>
+      <h1 class="example-app-name">ArtApp</h1>
+      <span class="example-spacer"></span>
+  
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/perfil">
+          <mat-icon>account_box</mat-icon>
+          <span>Mi Perfil</span>
+        </button>
+        <button mat-menu-item routerLink="/login">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Cerrar Sesión</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
