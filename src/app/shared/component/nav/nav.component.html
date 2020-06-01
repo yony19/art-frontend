@@ -10,7 +10,7 @@
 
     <mat-nav-list>
       <mat-divider></mat-divider>
-      <a mat-list-item (click)="drawer.toggle()" routerLink="/user" style="cursor:pointer">
+      <a mat-list-item routerLink="/user" style="cursor:pointer">
         <mat-icon>accessibility</mat-icon>
         <span>Usuarios</span>
       </a>
@@ -23,20 +23,11 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
 
       <button mat-icon-button (click)="drawer.toggle()">
-        <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
-        <mat-icon *ngIf="drawer.opened">close</mat-icon>
+        <mat-icon >menu</mat-icon>
       </button>
-      <h1 class="example-app-name">ArtApp</h1>
+      <h1 class="example-app-name">Aplicación Arte</h1>
       <span class="example-spacer"></span>
   
       <button mat-icon-button [matMenuTriggerFor]="menu">

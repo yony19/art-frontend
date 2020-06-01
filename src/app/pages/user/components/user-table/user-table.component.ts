@@ -1,30 +1,48 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { UserService } from './../../../../core/services/user.service';
+import { UserDto } from './../../../../core/dto/userDto.model';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { UserTableDataSource, UserTableItem } from './user-table-datasource';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.css']
 })
-export class UserTableComponent implements AfterViewInit, OnInit {
+export class UserTableComponent implements OnInit {
+
+  displayedColumns = ['id', 'name', 'lastname', 'gender', 'email', 'phone', 'acciones'];
+  dataSource: MatTableDataSource<UserDto>;
+  cantidad: number;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<UserTableItem>;
-  dataSource: UserTableDataSource;
-
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  
+  constructor(
+    private userService: UserService, 
+    private snackBar: MatSnackBar,
+    public route: ActivatedRoute
+    ) {}
 
   ngOnInit() {
-    this.dataSource = new UserTableDataSource();
+    this.userService.getAllUser().subscribe(users => {
+        console.log(users);
+      this.cantidad = users.length;
+      console.log(this.cantidad);
+      
+      this.dataSource = new MatTableDataSource(users);
+      this.dataSource.sort = this.sort;
+    });
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  mostrarMas(e) {
+
+  }
+
+  eliminar(row: UserDto) {
+
   }
 }

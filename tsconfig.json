@@ -16,6 +16,10 @@
       "dom"
     ]
   },
+  "paths": {
+    "@core/*": ["src/app/core/*"],
+    "@material/*": ["src/app/material/*"]
+  },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
