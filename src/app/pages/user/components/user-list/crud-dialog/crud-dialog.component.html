@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Crear usuario</h2>
+
+<mat-dialog-content>
+    <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Datos Personales</ng-template>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="firstCtrl" placeholder="Last name, First name" required>
+                </mat-form-field>
+                <div>
+                    <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Datos de Usuario</ng-template>
+                <mat-form-field appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+                </mat-form-field>
+                <div>
+                    <button mat-raised-button color="secondary" matStepperPrevious>Volver</button>
+                    <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Guardar</ng-template>
+            <p></p>
+            <div>
+                <button mat-raised-button color="secondary" matStepperPrevious>Volver</button>
+                <button mat-raised-button color="primary" (click)="stepper.reset()">Guardar</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</mat-dialog-content>

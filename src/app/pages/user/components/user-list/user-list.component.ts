@@ -1,5 +1,7 @@
-import { UserService } from './../../../../core/services/user.service';
+import { CrudDialogComponent } from './crud-dialog/crud-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { UserDto } from './../../../../core/dto/userDto.model';
+import { UserService } from './../../../../core/services/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -8,15 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-user-table',
-  templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.css']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.css']
 })
-export class UserTableComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
   displayedColumns = ['id', 'name', 'lastname', 'gender', 'email', 'phone', 'acciones'];
   dataSource: MatTableDataSource<UserDto>;
   cantidad: number;
+  mensaje: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -24,17 +27,24 @@ export class UserTableComponent implements OnInit {
   constructor(
     private userService: UserService, 
     private snackBar: MatSnackBar,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public dialog: MatDialog
     ) {}
 
   ngOnInit() {
     this.userService.getAllUser().subscribe(users => {
-        console.log(users);
       this.cantidad = users.length;
-      console.log(this.cantidad);
-      
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.sort = this.sort;
+    });
+  }
+
+  openDialog(userDto: UserDto): void  {
+    console.log("llega");
+    let user = userDto != null ? userDto : new UserDto();
+    let dialogRef = this.dialog.open(CrudDialogComponent, {
+      //data: { sdad: ""}
+      data: user
     });
   }
 

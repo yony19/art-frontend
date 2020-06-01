@@ -42,7 +42,7 @@
     <ng-container matColumnDef="acciones">
       <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" [routerLink]="['edicion',row.idPaciente]">
+        <button mat-icon-button color="primary" (click)="openDialog(row)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button color="warn" (click)="eliminar(row)">
@@ -70,6 +70,6 @@
 </div>
 
 <br/>
-<button mat-fab color="primary" style="float: right" routerLink="/paciente/nuevo">
+<button mat-fab color="primary" (click)="openDialog(null)" style="float: right" >
   <mat-icon>person_add</mat-icon>
 </button>

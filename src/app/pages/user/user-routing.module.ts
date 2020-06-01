@@ -1,4 +1,4 @@
-import { UserTableComponent } from './components/user-table/user-table.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 import { NavComponent } from './../../shared/component/nav/nav.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -10,7 +10,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: UserTableComponent
+                component: UserListComponent
             }
         ]
     }
