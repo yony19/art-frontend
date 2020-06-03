@@ -17,7 +17,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -39,7 +40,9 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatStepperModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule
   ],
   exports: [
     LayoutModule,
@@ -58,7 +61,9 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatStepperModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

@@ -11,22 +11,47 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class CrudDialogComponent implements OnInit {
 
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  datoPersonalFormGroup: FormGroup;
+  usuarioFormGroup: FormGroup;
   
   constructor(
     public dialogRef: MatDialogRef<CrudDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UserDto,
+    @Inject(MAT_DIALOG_DATA) public userDto: UserDto,
     private userService: UserService,
     private _formBuilder: FormBuilder
-  ) { }
+  ) { 
+    this.buildFomDatosPersonales();
+    this.buidFormUsuario();
+  }
 
   ngOnInit(): void {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+    
+  }
+
+  guardarTodo() {
+    alert("Guardado");
+  }
+
+  private buildFomDatosPersonales() {
+    this.datoPersonalFormGroup = this._formBuilder.group({ 
+      id: [''],
+      name: ['', Validators.required],
+      lastname: ['', Validators.required],
+      gender: [''],
+      email: ['', Validators.required],
+      phone: [''],
+      avatar_url: [''],
+      locked: [''],
+      visible: [''],
+      clients_id: ['']
     });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+  }
+
+  private buidFormUsuario() {
+    this.usuarioFormGroup = this._formBuilder.group({
+      id: [''],
+      password: ['', Validators.required],
+      persons_id: [''],
     });
   }
 
