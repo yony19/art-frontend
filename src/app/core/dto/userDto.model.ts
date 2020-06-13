@@ -9,5 +9,7 @@ export class UserDto {
     public gender: string;
     public email: string;
     public phone: string;
-    public avatar_url: string
+    public avatar_url: string;
+    public locked: boolean;
+    public visible: boolean;
 }

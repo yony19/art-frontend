@@ -1,15 +1,16 @@
-import { UserListComponent } from './components/user-list/user-list.component';
+import { ClientListComponent } from './components/client-list/client-list.component';
+import { NavComponent } from './../../shared/component/nav/nav.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
     {
         path: '',
-        component: UserListComponent,
+        component: ClientListComponent,
         /*children: [
             {
                 path: '',
-                component: UserListComponent
+                component: ClientListComponent
             }
         ]*/
     }
@@ -19,4 +20,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class UserRoutingModule { }
+export class ClientRoutingModule { }

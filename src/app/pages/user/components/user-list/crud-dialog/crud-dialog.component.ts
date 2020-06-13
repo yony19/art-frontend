@@ -19,17 +19,23 @@ export class CrudDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public userDto: UserDto,
     private userService: UserService,
     private _formBuilder: FormBuilder
-  ) { 
+  ) {
+    
     this.buildFomDatosPersonales();
     this.buidFormUsuario();
   }
 
   ngOnInit(): void {
-    
+
+    if (this.userDto!=null) {
+      this.datoPersonalFormGroup.patchValue(this.userDto);
+      this.usuarioFormGroup.get('password').clearValidators();
+      this.usuarioFormGroup.get('password').updateValueAndValidity();  
+    }
   }
 
   guardarTodo() {
-    alert("Guardado");
+    
   }
 
   private buildFomDatosPersonales() {
@@ -41,8 +47,8 @@ export class CrudDialogComponent implements OnInit {
       email: ['', Validators.required],
       phone: [''],
       avatar_url: [''],
-      locked: [''],
-      visible: [''],
+      locked: [false],
+      visible: [true],
       clients_id: ['']
     });
   }

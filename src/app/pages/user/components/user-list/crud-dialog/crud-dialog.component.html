@@ -1,10 +1,11 @@
-<h2 mat-dialog-title>Crear usuario</h2>
+<h2 mat-dialog-title >Crear usuario</h2>
 
 <mat-dialog-content>
     <mat-horizontal-stepper linear #stepper>
         <mat-step [stepControl]="datoPersonalFormGroup">
             <form [formGroup]="datoPersonalFormGroup" class="example-container">
                 <ng-template matStepLabel>Datos Personales</ng-template>
+                <br>
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <mat-form-field appearance="outline" class="full-width">
@@ -63,9 +64,10 @@
                         <mat-checkbox  formControlName="visible">Visible</mat-checkbox>
                     </div>
                 </div>
+                <hr>
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-                        <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+                        <button [disabled]="datoPersonalFormGroup.invalid" mat-raised-button color="primary" matStepperNext>Siguiente</button>
                     </div>
                 </div>
             </form>
@@ -73,19 +75,19 @@
         <mat-step [stepControl]="usuarioFormGroup">
             <form [formGroup]="usuarioFormGroup">
                 <ng-template matStepLabel>Datos de Usuario</ng-template>
+                <br>
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>Contraseña</mat-label>
-                            <input matInput formControlName="password" placeholder="Contraseña" required>
+                            <input matInput formControlName="password" placeholder="Contraseña">
                             <mat-icon matSuffix>vpn_key</mat-icon>
                         </mat-form-field>
                     </div>
                 </div>
-                
                 <div>
                     <button mat-raised-button color="secondary" matStepperPrevious>Volver</button>
-                    <button mat-raised-button color="primary" (click)="guardarTodo()">Guardar</button>
+                    <button [disabled]="usuarioFormGroup.invalid" mat-raised-button color="primary" (click)="guardarTodo()">Guardar</button>
                 </div>
             </form>
         </mat-step>

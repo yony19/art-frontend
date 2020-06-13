@@ -44,6 +44,7 @@ export class UserListComponent implements OnInit {
     let user = userDto != null ? userDto : new UserDto();
     let dialogRef = this.dialog.open(CrudDialogComponent, {
       //data: { sdad: ""}
+      height: '500px',
       data: user
     });
   }
