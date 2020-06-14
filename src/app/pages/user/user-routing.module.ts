@@ -6,12 +6,6 @@ const routes: Routes = [
     {
         path: '',
         component: UserListComponent,
-        /*children: [
-            {
-                path: '',
-                component: UserListComponent
-            }
-        ]*/
     }
 ];
 

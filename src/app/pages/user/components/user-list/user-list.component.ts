@@ -1,3 +1,4 @@
+import { Respuesta } from './../../../../core/models/respuesta.model';
 import { CrudDialogComponent } from './crud-dialog/crud-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDto } from './../../../../core/dto/userDto.model';
@@ -20,7 +21,7 @@ export class UserListComponent implements OnInit {
   dataSource: MatTableDataSource<UserDto>;
   cantidad: number;
   mensaje: string;
-
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
@@ -36,6 +37,18 @@ export class UserListComponent implements OnInit {
       this.cantidad = users.length;
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.sort = this.sort;
+    });
+
+    this.userService.userCambio.subscribe((usersDto: UserDto[]) => {
+
+      this.dataSource = new MatTableDataSource(usersDto);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+    });
+
+    this.userService.mensaje.subscribe(data => {
+      this.snackBar.open(data, null, { duration: 2000});
     });
   }
 
@@ -53,7 +66,16 @@ export class UserListComponent implements OnInit {
 
   }
 
-  eliminar(row: UserDto) {
-
+  eliminar(user: UserDto) {
+    this.userService.deleteUser(user.id).subscribe((response: Respuesta) => {
+      if (!response.error) {
+        this.userService.getAllUser().subscribe((users: UserDto[]) => {
+          this.userService.userCambio.next(users);
+          this.userService.mensaje.next("Se modificó correctamente.");
+        });
+      } else {
+        this.userService.mensaje.next(response.message);
+      }
+    });
   }
 }

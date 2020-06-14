@@ -12,4 +12,6 @@ export class UserDto {
     public avatar_url: string;
     public locked: boolean;
     public visible: boolean;
+    public password: string;
+    public clients_id: number;
 }
