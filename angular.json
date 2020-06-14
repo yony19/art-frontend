@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "art-frontend"
+  "defaultProject": "art-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
