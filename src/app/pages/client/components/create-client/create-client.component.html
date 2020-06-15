@@ -1,6 +1,6 @@
 <h1 mat-dialog-title class="title-crate-client">Crear Clientes</h1>
 
-<form [formGroup]="datoPersonalFormGroup">
+<form [formGroup]="clientForm">
     <br>
     <div class="row">
         <div class="col-md-12 col-sm-12">
@@ -54,7 +54,11 @@
     </div>
     <br>
     <div class="row">
-        <button mat-raised-button color="secondary">Volver</button>
-        <button mat-raised-button color="primary" (click)="onSubmit(datoPersonalFormGroup)">Guardar</button>
+        <div class="col-md-6 col-sm-6">
+            <button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <button mat-raised-button color="primary" (click)="onSubmit(clientForm)">Guardar</button>
+        </div>
     </div>
 </form>
