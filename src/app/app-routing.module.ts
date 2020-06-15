@@ -10,8 +10,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/user',
+        redirectTo: '/dashboard',
         pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'user',
@@ -22,6 +26,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule)
       }
     ]
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
   }
 ];
 

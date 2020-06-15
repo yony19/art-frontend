@@ -16,6 +16,7 @@ export class CrudDialogComponent implements OnInit {
   datoPersonalFormGroup: FormGroup;
   usuarioFormGroup: FormGroup;
   esNuevo: boolean = false;
+  title: string = "Crear nuevo usuario";
 
   constructor(
     public dialogRef: MatDialogRef<CrudDialogComponent>,
@@ -34,6 +35,7 @@ export class CrudDialogComponent implements OnInit {
       this.esNuevo = true;
     }
     if (!this.esNuevo) {
+      this.title = "Actualizar usuario";
       this.datoPersonalFormGroup.patchValue(this.userDto);
       this.usuarioFormGroup.get('password').clearValidators();
       this.usuarioFormGroup.get('password').updateValueAndValidity();  

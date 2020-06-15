@@ -31,3 +31,6 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+mat-nav-list a span {
+  padding-left: 8px;
+}
