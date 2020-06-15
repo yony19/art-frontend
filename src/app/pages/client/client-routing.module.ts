@@ -1,5 +1,4 @@
 import { ClientListComponent } from './components/client-list/client-list.component';
-import { NavComponent } from './../../shared/component/nav/nav.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -7,12 +6,12 @@ const routes: Routes = [
     {
         path: '',
         component: ClientListComponent,
-        /*children: [
+        /* children: [
             {
-                path: '',
-                component: ClientListComponent
+                path: 'create-client',
+                component: CreateClientComponent
             }
-        ]*/
+        ] */
     }
 ];
 

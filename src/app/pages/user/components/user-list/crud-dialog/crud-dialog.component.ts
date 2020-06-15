@@ -44,7 +44,6 @@ export class CrudDialogComponent implements OnInit {
   }
 
   guardarTodo() {
-
     let userDto = new UserDto();
     userDto.avatar_url = this.datoPersonalFormGroup.value['avatar_url'];
     userDto.email = this.datoPersonalFormGroup.value['email'];

@@ -1,0 +1,25 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    margin-left: 2%;
+    width: 96%;
+  }
+
+  .mat-elevation-z8 {
+      margin-left: 2%;
+      width: 96%;
+  }
+  
+  td, th {
+    width: 15%;
+  }
+  
+  .enabled {
+    color: #64dd17;
+  }
+  .disabled {
+    color: #3e2723;
+  }

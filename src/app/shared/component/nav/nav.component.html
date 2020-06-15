@@ -5,7 +5,7 @@
       [opened]="(isHandset$ | async) === false">
 
     <mat-toolbar>
-      <img src="assets/bitzua.png" width="100%" alt="">
+      <img src="assets/icon.jpg" width="150" height="" alt="">
     </mat-toolbar>
 
     <mat-nav-list>
@@ -25,6 +25,12 @@
         <mat-icon>add_business</mat-icon>
         <span>Clientes</span>
       </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/rol" style="cursor:pointer">
+        <mat-icon>people_alt</mat-icon>
+        <span>Roles</span>
+      </a>
+      <mat-divider></mat-divider>
     </mat-nav-list>
 
   </mat-sidenav>
