@@ -24,6 +24,10 @@ const routes: Routes = [
       {
         path: 'rol',
         loadChildren: () => import('./pages/roles/roles.module').then(m => m.RolesModule)
+      },
+      {
+        path: 'art',
+        loadChildren: () => import('./pages/art/art.module').then(m => m.ArtModule)
       }
     ]
   }
