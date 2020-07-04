@@ -5,19 +5,36 @@
       [opened]="(isHandset$ | async) === false">
 
     <mat-toolbar>
-      <img src="assets/bitzua.png" width="100%" alt="">
+      <img src="assets/icon.jpg" width="150" height="" alt="">
     </mat-toolbar>
 
     <mat-nav-list>
-      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/dashboard" style="cursor:pointer">
+        <mat-icon>pie_chart</mat-icon>
+        <span>Dashboard</span>
+      </a>
       <a mat-list-item routerLink="/user" style="cursor:pointer">
-        <mat-icon>accessibility</mat-icon>
+        <mat-icon>addchart</mat-icon>
+        <span>Crear arte</span>
+      </a>
+      <a mat-list-item routerLink="/user" style="cursor:pointer">
+        <mat-icon>accessibility_new</mat-icon>
         <span>Usuarios</span>
       </a>
-      <mat-divider></mat-divider>
       <a mat-list-item routerLink="/client" style="cursor:pointer">
         <mat-icon>add_business</mat-icon>
-        <span>Clientes</span>
+        <span>Empresa</span>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/rol" style="cursor:pointer">
+        <mat-icon>people_alt</mat-icon>
+        <span>Roles</span>
+      </a>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/art" style="cursor:pointer">
+        <mat-icon>people_alt</mat-icon>
+        <span>Arts</span>
       </a>
       <mat-divider></mat-divider>
     </mat-nav-list>
@@ -40,7 +57,7 @@
           <mat-icon>account_box</mat-icon>
           <span>Mi Perfil</span>
         </button>
-        <button mat-menu-item routerLink="/login">
+        <button mat-menu-item [routerLink]="['/auth/login']">
           <mat-icon>exit_to_app</mat-icon>
           <span>Cerrar Sesión</span>
         </button>

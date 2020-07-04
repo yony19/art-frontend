@@ -10,8 +10,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/user',
+        redirectTo: '/dashboard',
         pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'user',
@@ -20,8 +24,20 @@ const routes: Routes = [
       {
         path: 'client',
         loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule)
+      },
+      {
+        path: 'rol',
+        loadChildren: () => import('./pages/roles/roles.module').then(m => m.RolesModule)
+      },
+      {
+        path: 'art',
+        loadChildren: () => import('./pages/art/art.module').then(m => m.ArtModule)
       }
     ]
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
   }
 ];
 

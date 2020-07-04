@@ -1,4 +1,4 @@
-<h2 mat-dialog-title >Crear usuario</h2>
+<h2 mat-dialog-title >{{title}}</h2>
 
 <mat-dialog-content>
     <mat-horizontal-stepper linear #stepper>
@@ -58,10 +58,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
+                    </div>
+                    <div class="col-md-6 col-sm-12">
                         <mat-checkbox  formControlName="locked">Bloqueado</mat-checkbox>
                     </div>
                 </div>
-                <hr>
+                <br>
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <button [disabled]="datoPersonalFormGroup.invalid" mat-raised-button color="primary" matStepperNext>Siguiente</button>

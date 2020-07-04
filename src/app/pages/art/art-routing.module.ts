@@ -1,11 +1,11 @@
-import { ClientListComponent } from './components/client-list/client-list.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { ArtListComponent } from './components/art-list/art-list.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: ClientListComponent,
+        component: ArtListComponent,
         /* children: [
             {
                 path: 'create-client',
@@ -19,4 +19,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class ClientRoutingModule { }
+export class ArtRoutingModule { }
