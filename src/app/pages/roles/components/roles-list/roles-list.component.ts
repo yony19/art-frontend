@@ -1,17 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CrudRoleDialogComponent } from './crud-role-dialog/crud-role-dialog.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { RoleService } from './../../../../core/services/role.service';
+import { Role } from './../../../../core/models/role.model';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-];
 
 @Component({
   selector: 'app-roles-list',
@@ -20,10 +15,30 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 
-export class RolesListComponent {
+export class RolesListComponent  implements OnInit{
+
   displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  dataSource: MatTableDataSource<Role> = new MatTableDataSource<Role>();
+  selection = new SelectionModel<Role>(true, []);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  cantidad: number;
+  mensaje: string;
+
+  constructor(
+    private roleService: RoleService,
+    public dialog: MatDialog
+  ) {
+
+  }
+  ngOnInit() {
+    this.roleService.getAllRoles().subscribe((roles: Role[]) => {
+      this.cantidad = roles.length;
+      this.dataSource = new MatTableDataSource(roles);
+      this.dataSource.sort = this.sort;
+    });
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -40,11 +55,21 @@ export class RolesListComponent {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
+  checkboxLabel(row?: Role): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
-
+  
+  openDialog(role: Role): void  {
+    let user = role != null ? role : new Role();
+    
+    let dialogRef = this.dialog.open(CrudRoleDialogComponent, {
+      //data: { sdad: ""}
+      height: '500px',
+      width: '520px',
+      data: user
+    });
+  }
 }

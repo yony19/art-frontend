@@ -1,23 +1,34 @@
+import { catchError, map } from 'rxjs/operators';
+import { environment } from './../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { throwError, Subject } from 'rxjs';
 
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  mensaje = new Subject<string>();
+
   constructor(
-    private httpClient: HttpClient
+    private http: HttpClient
   ) { }
 
-  createUser(email: string, password: string) {
-    return null;
+  estaLogeado() {
+    let token = sessionStorage.getItem('access_token');
+    return token !=null;
   }
 
-  login(email: string, password: string) {
-    return null;
+  login(credentials: any) {
+    return this.http.post(`${environment.url_api}/session`, credentials)
+    .pipe(
+      //catchError(this.handlerError),
+      map((response: any) => {
+        return response.data
+      })
+    );;
   }
 
   logout() {
@@ -27,4 +38,12 @@ export class AuthService {
   hasUser() {
     return null;
   }
+
+
+  private handlerError(error: HttpErrorResponse) {
+    console.log(error.error);
+    
+    return throwError('Ups algo salio mal')
+  }
+
 }

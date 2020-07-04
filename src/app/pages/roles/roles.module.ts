@@ -1,3 +1,4 @@
+import { CrudRoleDialogComponent } from './components/roles-list/crud-role-dialog/crud-role-dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RolesListComponent } from './components/roles-list/roles-list.component';
@@ -9,7 +10,8 @@ import { CreateRolesComponent } from './components/create-roles/create-roles.com
 
 
 @NgModule({
-  declarations: [RolesListComponent, CreateRolesComponent],
+  declarations: [RolesListComponent, CreateRolesComponent, CrudRoleDialogComponent],
+  entryComponents: [CrudRoleDialogComponent],
   imports: [
     CommonModule,
     RolesRoutingModule,
