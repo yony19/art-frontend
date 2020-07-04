@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url_api: 'http://localhost/api-rest-arts/public',
+  url_api: 'http://arte.test',
 };
 
 /*

@@ -1,3 +1,7 @@
 .full-width-table {
   width: 100%;
 }
+.mat-elevation-z6 {
+  margin-left: 2%;
+  width: 96%;
+}
