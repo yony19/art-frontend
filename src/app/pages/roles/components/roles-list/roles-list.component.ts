@@ -1,3 +1,5 @@
+import { Respuesta } from './../../../../core/models/respuesta.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { CrudRoleDialogComponent } from './crud-role-dialog/crud-role-dialog.component';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,7 +19,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class RolesListComponent  implements OnInit{
 
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['select', 'id', 'name', 'description', 'level', 'acciones'];
   dataSource: MatTableDataSource<Role> = new MatTableDataSource<Role>();
   selection = new SelectionModel<Role>(true, []);
 
@@ -28,7 +30,8 @@ export class RolesListComponent  implements OnInit{
 
   constructor(
     private roleService: RoleService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
 
   }
@@ -37,6 +40,17 @@ export class RolesListComponent  implements OnInit{
       this.cantidad = roles.length;
       this.dataSource = new MatTableDataSource(roles);
       this.dataSource.sort = this.sort;
+    });
+
+    this.roleService.roleCambio.subscribe((roles: Role[]) => {
+      this.dataSource = new MatTableDataSource(roles);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+    });
+
+    this.roleService.mensaje.subscribe(data => {
+      this.snackBar.open(data, null, { duration: 2000});
     });
   }
 
@@ -72,4 +86,22 @@ export class RolesListComponent  implements OnInit{
       data: user
     });
   }
+
+  eliminar(role: Role) {
+    this.roleService.delete(role.id).subscribe((response: Respuesta) => {
+      if (!response.error) {
+        this.roleService.getAllRoles().subscribe((roles: Role[]) => {
+          this.roleService.roleCambio.next(roles);
+          this.roleService.mensaje.next("Se modificó correctamente.");
+        });
+      } else {
+        this.roleService.mensaje.next(response.message);
+      }
+    });
+  }
+
+  mostrarMas(e) {
+
+  }
+
 }

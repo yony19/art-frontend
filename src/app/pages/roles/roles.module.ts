@@ -5,12 +5,11 @@ import { RolesListComponent } from './components/roles-list/roles-list.component
 import { RolesRoutingModule } from './roles-routing.module';
 import { MaterialModule } from 'src/app/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateRolesComponent } from './components/create-roles/create-roles.component';
 
 
 
 @NgModule({
-  declarations: [RolesListComponent, CreateRolesComponent, CrudRoleDialogComponent],
+  declarations: [RolesListComponent, CrudRoleDialogComponent],
   entryComponents: [CrudRoleDialogComponent],
   imports: [
     CommonModule,
