@@ -1,3 +1,5 @@
+import { Role } from './../../../../../core/models/role.model';
+import { RoleService } from './../../../../../core/services/role.service';
 import { Respuesta } from './../../../../../core/models/respuesta.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './../../../../../core/services/user.service';
@@ -17,13 +19,16 @@ export class CrudDialogComponent implements OnInit {
   usuarioFormGroup: FormGroup;
   esNuevo: boolean = false;
   title: string = "Crear nuevo usuario";
+  roles: Role[];
+  idRoleSelected: number;
 
   constructor(
     public dialogRef: MatDialogRef<CrudDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public userDto: UserDto,
     private userService: UserService,
     private _formBuilder: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private roleService: RoleService
   ) {
     
     this.buildFomDatosPersonales();
@@ -37,10 +42,21 @@ export class CrudDialogComponent implements OnInit {
     if (!this.esNuevo) {
       this.title = "Actualizar usuario";
       this.datoPersonalFormGroup.patchValue(this.userDto);
+      this.usuarioFormGroup.patchValue(this.userDto);
+      console.log(this.userDto);
+      console.log(this.usuarioFormGroup.value);
+      
       this.usuarioFormGroup.get('password').clearValidators();
       this.usuarioFormGroup.get('password').updateValueAndValidity();  
     }
     
+    this.roleService.getAllRoles()
+        .subscribe((rolesArray: Role[]) => {
+          this.roles = rolesArray;
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   guardarTodo() {
@@ -52,6 +68,7 @@ export class CrudDialogComponent implements OnInit {
     userDto.lastname = this.datoPersonalFormGroup.value['lastname'];
     userDto.phone = this.datoPersonalFormGroup.value['phone'];
     userDto.locked = this.datoPersonalFormGroup.value['locked'];
+    userDto.roles_id = this.usuarioFormGroup.value['roles_id'];
     
     if (this.usuarioFormGroup.value['password'] !== '') {
       userDto.password = this.usuarioFormGroup.value['password'];
@@ -105,6 +122,7 @@ export class CrudDialogComponent implements OnInit {
       id: [''],
       password: ['', Validators.required],
       persons_id: [''],
+      roles_id: [null],
     });
   }
 

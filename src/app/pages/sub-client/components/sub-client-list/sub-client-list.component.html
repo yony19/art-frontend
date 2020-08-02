@@ -1,0 +1,75 @@
+<mat-toolbar>Clientes</mat-toolbar>
+
+<div class="mat-elevation-z6">
+
+  <mat-table [dataSource]="dataSource" matSort>
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Last name Column -->
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Apellidos</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.lastname}}</mat-cell>
+    </ng-container>
+
+    <!-- Gender Column -->
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Genero</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.gender}}</mat-cell>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.phone}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button color="primary" [routerLink]="['form', row.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="eliminar(row)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator 
+  [pageSizeOptions]="[5, 10, 25, 100]" 
+  [length]="dataSource?.data.length" 
+  (page)="mostrarMas($event)"></mat-paginator>
+  
+ <!-- <mat-paginator #paginator
+      [length]="dataSource?.data.length"
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>-->
+</div>
+
+<br/>
+<button mat-fab color="primary" [routerLink]="['form']" style="float: right" >
+  <mat-icon>person_add</mat-icon>
+</button>

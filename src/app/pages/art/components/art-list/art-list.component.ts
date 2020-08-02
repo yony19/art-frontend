@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  correo: string;
-  celular: number;
-  telf: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {correo: 'javier@gmail.com', name: 'Hydrogen', celular: 1.0079, telf: 987654321},
-];
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { Person } from './../../../../core/models/person.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { PersonService } from './../../../../core/services/person.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-art-list',
@@ -17,37 +13,58 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./art-list.component.css']
 })
 export class ArtListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'celular', 'telf', 'correo'];
+  displayedColumns: string[] = ['id', 'nombreCompleto', 'email', 'phone', 'acciones'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
-  data: PeriodicElement[] = ELEMENT_DATA;
 
-  constructor() { }
+  dataSource: MatTableDataSource<Person>;
+  arteForm: FormGroup;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  cantidad: number;
+  mensaje: string;
+  isOpenForm: boolean = false;
+  redName: string;
+  constructor(private personService: PersonService,
+    private snackBar: MatSnackBar,
+    private _formBuilder: FormBuilder) {
+      this.buildFomArte();
+    }
 
   ngOnInit(): void {
+    this.personService.getAllPersons().subscribe(users => {
+      this.cantidad = users.length;
+      this.dataSource = new MatTableDataSource(users);
+      this.dataSource.sort = this.sort;
+    });
+    this.personService.mensaje.subscribe(data => {
+      this.snackBar.open(data, null, { duration: 2000});
+    });
   }
 
-  addColumn() {
-    const randomColumn = Math.floor(Math.random() * this.displayedColumns.length);
-    this.columnsToDisplay.push(this.displayedColumns[randomColumn]);
+  mostrarMas(event) {
+
   }
 
-  removeColumn() {
-    if (this.columnsToDisplay.length) {
-      this.columnsToDisplay.pop();
-    }
+  applyFilter(value: string) {
+
   }
 
-  shuffle() {
-    let currentIndex = this.columnsToDisplay.length;
-    while (0 !== currentIndex) {
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
+  onFileSelected() {
 
-      // Swap
-      let temp = this.columnsToDisplay[currentIndex];
-      this.columnsToDisplay[currentIndex] = this.columnsToDisplay[randomIndex];
-      this.columnsToDisplay[randomIndex] = temp;
-    }
   }
 
+  openForm(red) {
+    this.redName = red;
+    this.isOpenForm = true;
+  }
+
+  private buildFomArte() {
+    this.arteForm = this._formBuilder.group({ 
+      id: [''],
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      file: [''],
+      date: ['', Validators.required]
+    });
+  }
 }

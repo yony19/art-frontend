@@ -26,9 +26,14 @@ const routes: Routes = [
         loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
       },
       {
-        path: 'client',
+        path: 'business',
         canActivate: [GuardService],
         loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule)
+      },
+      {
+        path: 'client',
+        canActivate: [GuardService],
+        loadChildren: () => import('./pages/sub-client/sub-client.module').then(m => m.SubClientModule)
       },
       {
         path: 'role',

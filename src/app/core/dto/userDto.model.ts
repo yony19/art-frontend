@@ -14,4 +14,5 @@ export class UserDto {
     public visible: boolean;
     public password: string;
     public clients_id: number;
+    public roles_id: number;
 }

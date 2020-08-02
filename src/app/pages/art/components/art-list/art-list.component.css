@@ -1,33 +1,27 @@
-table {
-    width: 100%;
-  }
-  
-  button {
-    margin: 16px 8px;
-  }
 
-  table {
+  .full-width {
     width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    margin-left: 2%;
-    width: 96%;
-  }
-
-  .mat-elevation-z8 {
+}
+  .mat-elevation-z6 {
       margin-left: 2%;
       width: 96%;
   }
-  
-  td, th {
-    width: 15%;
-  }
-  
   .enabled {
     color: #64dd17;
   }
   .disabled {
     color: #3e2723;
+  }
+  .twitter {
+    background-color: rgb(29, 161, 242);
+  }
+  .whatsapp {
+    background-color: #07bc4c;
+    color: white;
+  }
+  .button-socialite {
+    margin-top: 5px;
+  }
+  .filter-input {
+    margin-right: 3px;
   }

@@ -34,3 +34,7 @@
 mat-nav-list a span {
   padding-left: 8px;
 }
+
+.active {
+  background-color: #c1c3c3;
+}
